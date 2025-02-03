@@ -8,6 +8,9 @@ import { CreateApiToken } from 'src/app/use-cases/authentication/api-token/creat
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { ValidateApiToken } from 'src/app/use-cases/authentication/api-token/validade-api-token';
+import { CreateProject } from 'src/app/use-cases/projects/create-project';
+import { ProjectsController } from './controllers/projects.controller';
+import { FindProjects } from 'src/app/use-cases/projects/find-projects';
 
 @Module({
   imports: [
@@ -22,12 +25,14 @@ import { ValidateApiToken } from 'src/app/use-cases/authentication/api-token/val
     HttpModuleAxios,
     DatabaseModule,
   ],
-  controllers: [AuthenticationController],
+  controllers: [AuthenticationController, ProjectsController],
   providers: [
     GenerateOAuth2RedirectUrl,
     GetUserFromOAuth2,
     CreateApiToken,
     ValidateApiToken,
+    CreateProject,
+    FindProjects,
   ],
 })
 export class HttpModule {}

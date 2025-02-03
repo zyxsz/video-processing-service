@@ -19,6 +19,8 @@ export class PrismaApiTokenRepository implements ApiTokenRepository {
       where: { id },
     });
 
+    if (!prismaApiToken) return null;
+
     return PrismaApiTokenMapper.toDomain(prismaApiToken);
   }
 }
