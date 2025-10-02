@@ -1,0 +1,24 @@
+GET http://localhost:3333/authentication/me
+Authorization: Bearer test
+
+###
+
+GET http://localhost:3333/authentication/oauth2/google/redirect
+
+###
+
+POST http://localhost:3333/authentication/oauth2/google/callback
+Content-Type: application/json
+
+{
+  "code": "test"
+}
+
+###
+
+POST https://oauth2.googleapis.com/token?code=4/
+
+###
+
+GET https://www.googleapis.com/oauth2/v1/userinfo
+Authorization: Bearer test

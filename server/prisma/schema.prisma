@@ -37,6 +37,7 @@ model User {
   createdAt DateTime @default(now())
 
   apiTokens ApiToken[]
+  projects  UsersOnProjects[]
 
   @@map("users")
 }
@@ -57,4 +58,48 @@ model ApiToken {
   createdAt DateTime @default(now())
 
   @@map("apiTokens")
+}
+
+model Project {
+  id String @id
+
+  name String
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  users UsersOnProjects[]
+
+  @@map("projects")
+}
+
+enum UserOnProjectStatus {
+  REQUESTED
+  ACCEPTED
+  DENIED
+}
+
+model UsersOnProjects {
+  roleId String
+
+  status UserOnProjectStatus @default(REQUESTED)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  projectId String
+
+  attachedAt  DateTime?
+  updatedAt   DateTime  @updatedAt
+  requestedAt DateTime  @default(now())
+
+  @@id([userId, projectId])
+  @@map("usersOnProjects")
+}
+
+model Storage {
+  id String @id
+
+  @@map("storages")
 }

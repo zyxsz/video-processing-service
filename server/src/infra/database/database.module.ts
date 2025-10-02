@@ -7,6 +7,8 @@ import { UserRepository } from 'src/app/repositories/user-repository';
 import { PrismaUserRepository } from './prisma/repositories/prisma-user-repository';
 import { ApiTokenRepository } from 'src/app/repositories/api-token-repository';
 import { PrismaApiTokenRepository } from './prisma/repositories/prisma-api-token-repository';
+import { ProjectsRepository } from 'src/app/repositories/projects-repository';
+import { PrismaProjectsRepository } from './prisma/repositories/prisma-projects-repository';
 
 @Module({
   providers: [
@@ -17,7 +19,13 @@ import { PrismaApiTokenRepository } from './prisma/repositories/prisma-api-token
     },
     { provide: UserRepository, useClass: PrismaUserRepository },
     { provide: ApiTokenRepository, useClass: PrismaApiTokenRepository },
+    { provide: ProjectsRepository, useClass: PrismaProjectsRepository },
   ],
-  exports: [ProviderRepository, UserRepository, ApiTokenRepository],
+  exports: [
+    ProviderRepository,
+    UserRepository,
+    ApiTokenRepository,
+    ProjectsRepository,
+  ],
 })
 export class DatabaseModule {}
